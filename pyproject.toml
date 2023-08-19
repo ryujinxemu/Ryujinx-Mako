@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "ryujinx-mako"
+version = "0.0.0"
+description = "A custom GitHub App to aid Ryujinx with project management and moderation"
+license = "MIT"
+authors = [
+    "Ryujinx Team and Contributors"
+]
+readme = "README.md"
+repository = "https://github.com/Ryujinx/Ryujinx-Mako"
+packages = [{include = "ryujinx_mako"}]
+
+[tool.poetry.dependencies]
+python = ">=3.8"
+PyGithub = "^1.59.1"
+PyYAML = "^6.0.1"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.7.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
