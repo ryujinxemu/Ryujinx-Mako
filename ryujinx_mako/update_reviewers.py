@@ -23,7 +23,7 @@ def update_reviewers(config, repo: Repository, pr_id: int) -> int:
     pull_request = repo.get_pull(pr_id)
 
     if not pull_request:
-        sys.stderr.writable(f"Unknown PR #{pr_id}\n")
+        sys.stderr.write(f"Unknown PR #{pr_id}\n")
         return 1
 
     if pull_request.draft:
