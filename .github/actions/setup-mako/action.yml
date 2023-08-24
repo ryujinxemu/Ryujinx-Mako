@@ -1,0 +1,12 @@
+name: 'Setup Ryujinx-Mako'
+description: 'Setup the environment for Ryujinx-Mako'
+runs:
+  using: 'composite'
+  steps:
+    - run: pipx install poetry
+      shell: bash
+
+    - run: |
+        cd .ryujinx-mako
+        poetry install --only main
+      shell: bash
