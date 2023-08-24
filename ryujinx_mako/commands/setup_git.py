@@ -15,8 +15,12 @@ class SetupGit(GithubSubcommand):
         return f"Set git identity to {NAME}"
 
     def __init__(self, parser: ArgumentParser):
-        parser.add_argument("-l", "--local", action="store_true",
-                            help="Set git identity only for the current repository.")
+        parser.add_argument(
+            "-l",
+            "--local",
+            action="store_true",
+            help="Set git identity only for the current repository.",
+        )
         super().__init__(parser)
 
     def run(self, args: Namespace):
@@ -38,6 +42,8 @@ class SetupGit(GithubSubcommand):
             self.logger.info(f"Setting git {option} to: {value}")
             command = base_command.copy()
             command.extend([option, value])
-            process = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            process = subprocess.run(
+                command, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+            )
             process.check_returncode()
             self.logger.info("Success!")

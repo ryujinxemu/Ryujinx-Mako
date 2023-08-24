@@ -1,4 +1,5 @@
 import os
+
 try:
     # Available with Python 3.11
     from enum import StrEnum
