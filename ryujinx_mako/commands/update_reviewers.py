@@ -27,6 +27,10 @@ class UpdateReviewers(GithubSubcommand):
 
         super().__init__(parser)
 
+    @property
+    def reviewers_lower(self) -> list[str]:
+        return [x.lower() for x in self._reviewers]
+
     def add_reviewers(self, new_entries: list[str]):
         for reviewer in new_entries:
             if reviewer.startswith("@"):
@@ -54,8 +58,8 @@ class UpdateReviewers(GithubSubcommand):
         if "default" in config:
             self.add_reviewers(config["default"])
 
-        if pull_request_author in self._reviewers:
-            self._reviewers.remove(pull_request_author)
+        if pull_request_author.lower() in self.reviewers_lower:
+            self._reviewers.remove(self.reviewers_lower.index(pull_request_author.lower()))
 
         try:
             reviewers = list(self._reviewers)
