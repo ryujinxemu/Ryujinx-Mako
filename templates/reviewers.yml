@@ -1,0 +1,5 @@
+label-name:
+  - username
+
+default:
+  - '@team-slug'

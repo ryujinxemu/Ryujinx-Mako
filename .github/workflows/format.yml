@@ -1,0 +1,33 @@
+name: Format
+
+on:
+  push:
+
+jobs:
+  black:
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v3
+
+        - name: Configure git
+          run: |
+            git config --global user.name "ryujinx-mako[bot]"
+            git config --global user.email "142357924+ryujinx-mako[bot]@users.noreply.github.com"
+
+        - uses: psf/black@stable
+          with:
+            options: "--verbose"
+
+        - name: Check if files have been modified
+          id: mod_check
+          run: |
+            [[ $(git status -s | wc -l) -le 1 ]] \
+            && echo "is-dirty=false" >> "$GITHUB_OUTPUT" \
+            || echo "is-dirty=true" >> "$GITHUB_OUTPUT"
+
+        - name: Commit and push changes
+          if: steps.mod_check.outputs.is-dirty == 'true'
+          run: |
+            git add .
+            git commit -m "Apply black formatting"
+            git push
