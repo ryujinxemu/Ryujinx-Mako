@@ -12,10 +12,10 @@ A custom GitHub App to aid Ryujinx with project management and moderation
      with:
        repository: Ryujinx/Ryujinx-Mako
        ref: master
-       path: ".ryujinx-mako"
+       path: '.ryujinx-mako'
    
    - name: Setup Ryujinx-Mako
-     uses: .ryujinx-mako/.github/actions/setup-mako
+     uses: ./.ryujinx-mako/.github/actions/setup-mako
    ```
    
 2. Execute the available commands like this:
@@ -27,6 +27,10 @@ A custom GitHub App to aid Ryujinx with project management and moderation
         # ryujinx-mako <command> [<args>]
         # for example:
         ryujinx-mako setup-git
+     env:
+       MAKO_APP_ID: ${{ secrets.MAKO_APP_ID }}
+       MAKO_PRIVATE_KEY: ${{ secrets.MAKO_PRIVATE_KEY }}
+       MAKO_INSTALLATION_ID: ${{ secrets.MAKO_INSTALLATION_ID }}
    ```
 
 ## Available commands
