@@ -23,10 +23,9 @@ A custom GitHub App to aid Ryujinx with project management and moderation
    ```yml
    - name: Setup git identity for Ryujinx-Mako
      run: |
-        poetry -C .ryujinx-mako shell
-        # ryujinx-mako <command> [<args>]
+        # poetry -n -C .ryujinx-mako run ryujinx-mako <command> [<args>]
         # for example:
-        ryujinx-mako setup-git
+        poetry -n -C .ryujinx-mako run ryujinx-mako setup-git
      env:
        MAKO_APP_ID: ${{ secrets.MAKO_APP_ID }}
        MAKO_PRIVATE_KEY: ${{ secrets.MAKO_PRIVATE_KEY }}
