@@ -2,7 +2,7 @@ import argparse
 import logging
 
 from ryujinx_mako import commands
-from ryujinx_mako._const import SCRIPT_NAME, NAME
+from ryujinx_mako._const import SCRIPT_NAME
 
 parser = argparse.ArgumentParser(
     prog=SCRIPT_NAME,
@@ -26,7 +26,7 @@ for subcommand in commands.SUBCOMMANDS:
 
 
 def run():
-    logger = logging.getLogger(NAME)
+    logger = logging.getLogger(SCRIPT_NAME)
     logger.addHandler(logging.StreamHandler())
     logger.setLevel(logging.INFO)
 
