@@ -21,7 +21,7 @@ runs:
   using: 'composite'
   steps:
     - run: |
-        poetry -n -C "${{ github.action_path }}../" run ryujinx-mako ${{ inputs.command }} ${{ inputs.args }}
+        poetry -n -C "${{ github.action_path }}" run ryujinx-mako ${{ inputs.command }} ${{ inputs.args }}
       shell: bash
       env:
         MAKO_APP_ID: ${{ inputs.app_id }}
