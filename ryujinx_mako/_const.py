@@ -21,7 +21,7 @@ SCRIPT_NAME = NAME.lower().replace("-", "_")
 
 # Check environment variables
 for key in ConfigKey:
-    if key not in os.environ.keys():
+    if key not in os.environ.keys() or len(os.environ[key]) == 0:
         raise KeyError(f"Required environment variable not set: {key}")
 
 APP_ID = int(os.environ[ConfigKey.AppID])
