@@ -29,7 +29,7 @@ class SetupGit(GithubSubcommand):
 
         self.logger.debug(f"Getting GitHub user for: {gh_username}")
         user = self.github.get_user(gh_username)
-        email = GH_EMAIL_TEMPLATE.format(user_id=user.id, username=user.name)
+        email = GH_EMAIL_TEMPLATE.format(user_id=user.id, username=user.login)
 
         if args.local:
             self.logger.debug("Setting git identity for local repo...")
@@ -37,7 +37,7 @@ class SetupGit(GithubSubcommand):
             self.logger.debug("Setting git identity globally...")
             base_command.append("--global")
 
-        config = {"user.name": user.name, "user.email": email}
+        config = {"user.name": user.login, "user.email": email}
         for option, value in config.items():
             self.logger.info(f"Setting git {option} to: {value}")
             command = base_command.copy()
