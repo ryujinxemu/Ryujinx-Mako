@@ -1,5 +1,5 @@
-name: 'Setup Ryujinx-Mako'
-description: 'Setup the environment for Ryujinx-Mako'
+name: 'Setup Mako'
+description: 'Setup the environment for Mako'
 runs:
   using: 'composite'
   steps:
@@ -7,6 +7,6 @@ runs:
       shell: bash
 
     - run: |
-        cd .ryujinx-mako
+        cd "${{ github.action_path }}/../"
         poetry install --only main
       shell: bash
