@@ -20,8 +20,14 @@ inputs:
 runs:
   using: 'composite'
   steps:
+    - name: Get Mako path
+      id: path
+      run: |
+        echo "mako=$(realpath '${{ github.action_path }}/../../../')" >> $GITHUB_OUTPUT
+      shell: bash
+
     - run: |
-        poetry -n -C "${{ github.action_path }}" run ryujinx-mako ${{ inputs.command }} ${{ inputs.args }}
+        poetry -n -C "${{ steps.path.outputs.mako }}" run ryujinx-mako ${{ inputs.command }} ${{ inputs.args }}
       shell: bash
       env:
         MAKO_APP_ID: ${{ inputs.app_id }}

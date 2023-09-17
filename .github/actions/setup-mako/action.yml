@@ -3,10 +3,16 @@ description: 'Setup the environment for Mako'
 runs:
   using: 'composite'
   steps:
+    - name: Get Mako path
+      id: path
+      run: |
+        echo "mako=$(realpath '${{ github.action_path }}/../../../')" >> $GITHUB_OUTPUT
+      shell: bash
+
     - run: pipx install poetry
       shell: bash
 
     - run: |
-        cd "${{ github.action_path }}/../"
+        cd "${{ steps.path.outputs.mako }}"
         poetry install --only main
       shell: bash

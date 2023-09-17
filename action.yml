@@ -29,11 +29,11 @@ runs:
       shell: bash
 
     - name: Setup Mako
-      if: steps.check_dest.outputs.exists == "false"
+      if: steps.check_dest.outputs.exists == 'false'
       uses: ./.github/actions/setup-mako
 
     - name: Create setup finished flag
-      if: steps.check_dest.outputs.exists == "false"
+      if: steps.check_dest.outputs.exists == 'false'
       run: touch "${{ github.action_path }}/.ryujinx-mako_setup-done"
       shell: bash
 
