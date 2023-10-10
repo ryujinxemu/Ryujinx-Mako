@@ -20,7 +20,7 @@ for subcommand in commands.SUBCOMMANDS:
     subcommand_parser = subparsers.add_parser(
         subcommand.name(),
         description=subcommand.description(),
-        add_help=True,
+        help=subcommand.description(),
     )
     Subcommand.add_subcommand(subcommand.name(), subcommand(subcommand_parser))
     # Keep a reference to the subcommand

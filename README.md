@@ -28,9 +28,9 @@ options:
   -h, --help            show this help message and exit
 
 subcommands:
-  setup-git             Set git identity to Ryujinx-Mako
-  
-  update-reviewers      Update reviewers for the specified PR
+  {setup-git,update-reviewers}
+    setup-git           Configure git identity for Ryujinx-Mako
+    update-reviewers    Update reviewers for the specified PR
 ```
 
 ### setup-git
@@ -38,11 +38,11 @@ subcommands:
 ```
 usage: ryujinx_mako setup-git [-h] [-l]
 
-Set git identity to Ryujinx-Mako
+Configure git identity for Ryujinx-Mako
 
 options:
   -h, --help   show this help message and exit
-  -l, --local  Set git identity only for the current repository.
+  -l, --local  configure the git identity only for the current repository
 ```
 
 ### update-reviewers
@@ -53,9 +53,9 @@ usage: ryujinx_mako update-reviewers [-h] repo_path pr_number config_path
 Update reviewers for the specified PR
 
 positional arguments:
-  repo_path
-  pr_number
-  config_path
+  repo_path    full name of the GitHub repository (format: OWNER/REPO)
+  pr_number    the number of the pull request to check
+  config_path  the path to the reviewers config file
 
 options:
   -h, --help   show this help message and exit

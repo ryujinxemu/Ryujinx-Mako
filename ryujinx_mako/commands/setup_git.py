@@ -12,14 +12,14 @@ class SetupGit(GithubSubcommand):
 
     @staticmethod
     def description() -> str:
-        return f"Set git identity to {NAME}"
+        return f"Configure git identity for {NAME}"
 
     def __init__(self, parser: ArgumentParser):
         parser.add_argument(
             "-l",
             "--local",
             action="store_true",
-            help="Set git identity only for the current repository.",
+            help="configure the git identity only for the current repository",
         )
         super().__init__(parser)
 
