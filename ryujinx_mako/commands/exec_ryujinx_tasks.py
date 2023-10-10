@@ -80,7 +80,7 @@ class ExecRyujinxTasks(GithubSubcommand):
         with open(args.event_path, "r") as file:
             self._event = json.load(file)
 
-        if args.event_name == "pull_request":
+        if args.event_name == "pull_request_target":
             self.update_reviewers()
 
         self.logger.info("Finished executing Ryujinx tasks!")
