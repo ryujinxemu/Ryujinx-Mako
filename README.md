@@ -26,7 +26,7 @@ Add the following step to your workflow:
 ## Available commands
 
 ```
-usage: ryujinx_mako [-h] {setup-git,update-reviewers} ...
+usage: ryujinx_mako [-h] {setup-git,update-reviewers,exec-ryujinx-tasks} ...
 
 A python module to aid Ryujinx with project management and moderation
 
@@ -34,9 +34,10 @@ options:
   -h, --help            show this help message and exit
 
 subcommands:
-  {setup-git,update-reviewers}
+  {setup-git,update-reviewers,exec-ryujinx-tasks}
     setup-git           Configure git identity for Ryujinx-Mako
     update-reviewers    Update reviewers for the specified PR
+    exec-ryujinx-tasks  Execute all Ryujinx tasks for a specific event
 ```
 
 ### setup-git
@@ -65,4 +66,29 @@ positional arguments:
 
 options:
   -h, --help   show this help message and exit
+```
+
+### exec-ryujinx-tasks
+
+```
+usage: ryujinx_mako exec-ryujinx-tasks [-h] --event-name EVENT_NAME
+                                       --event-path EVENT_PATH [-w WORKSPACE]
+                                       repo_path run_id
+
+Execute all Ryujinx tasks for a specific event
+
+positional arguments:
+  repo_path             full name of the GitHub repository (format:
+                        OWNER/REPO)
+  run_id                The unique identifier of the workflow run
+
+options:
+  -h, --help            show this help message and exit
+  --event-name EVENT_NAME
+                        the name of the event that triggered the workflow run
+  --event-path EVENT_PATH
+                        the path to the file on the runner that contains the
+                        full event webhook payload
+  -w WORKSPACE, --workspace WORKSPACE
+                        the working directory on the runner
 ```
