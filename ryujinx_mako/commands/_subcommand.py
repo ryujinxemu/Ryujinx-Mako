@@ -6,7 +6,8 @@ from typing import Any
 from github import Github
 from github.Auth import AppAuth
 
-from ryujinx_mako._const import APP_ID, PRIVATE_KEY, INSTALLATION_ID, SCRIPT_NAME
+from ryujinx_mako._const import APP_ID, PRIVATE_KEY, INSTALLATION_ID, SCRIPT_NAME, \
+    IS_DRY_RUN
 
 
 class Subcommand(ABC):
@@ -50,7 +51,7 @@ class Subcommand(ABC):
 class GithubSubcommand(Subcommand, ABC):
     _github = Github(
         auth=AppAuth(APP_ID, PRIVATE_KEY).get_installation_auth(INSTALLATION_ID)
-    )
+    ) if not IS_DRY_RUN else None
 
     @property
     def github(self):
