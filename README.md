@@ -17,6 +17,12 @@ Add the following step to your workflow:
     installation_id: ${{ secrets.MAKO_INSTALLATION_ID }}
 ```
 
+## Required environment variables
+
+- `MAKO_APP_ID`: the GitHub App ID
+- `MAKO_PRIVATE_KEY`: the contents of the GitHub App private key
+- `MAKO_INSTALLATION_ID`: the GitHub App installation ID
+
 ## Available commands
 
 ```
