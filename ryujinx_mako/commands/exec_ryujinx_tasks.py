@@ -38,7 +38,7 @@ class ExecRyujinxTasks(GithubSubcommand):
             type=str,
             required=True,
             help="the path to the file on the runner that contains the full "
-                 "event webhook payload",
+            "event webhook payload",
         )
         parser.add_argument(
             "-w",
@@ -46,7 +46,7 @@ class ExecRyujinxTasks(GithubSubcommand):
             type=Path,
             required=False,
             default=Path(os.getcwd()),
-            help="the working directory on the runner"
+            help="the working directory on the runner",
         )
         parser.add_argument(
             "repo_path",

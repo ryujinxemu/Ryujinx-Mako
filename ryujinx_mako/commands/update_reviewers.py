@@ -27,9 +27,7 @@ class UpdateReviewers(GithubSubcommand):
             help="full name of the GitHub repository (format: OWNER/REPO)",
         )
         parser.add_argument(
-            "pr_number",
-            type=int,
-            help="the number of the pull request to check"
+            "pr_number", type=int, help="the number of the pull request to check"
         )
         parser.add_argument(
             "config_path",
