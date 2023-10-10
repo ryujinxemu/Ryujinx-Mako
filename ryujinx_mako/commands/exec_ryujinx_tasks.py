@@ -51,13 +51,11 @@ class ExecRyujinxTasks(GithubSubcommand):
         parser.add_argument(
             "repo_path",
             type=str,
-            required=True,
             help="full name of the GitHub repository (format: OWNER/REPO)",
         )
         parser.add_argument(
             "run_id",
             type=int,
-            required=True,
             help="The unique identifier of the workflow run",
         )
         super().__init__(parser)
