@@ -31,14 +31,14 @@ class ExecRyujinxTasks(GithubSubcommand):
             "--event-name",
             type=str,
             required=True,
-            help="The name of the event that triggered the workflow run.",
+            help="the name of the event that triggered the workflow run",
         )
         parser.add_argument(
             "--event-path",
             type=str,
             required=True,
-            help="The path to the file on the runner that contains the full "
-                 "event webhook payload.",
+            help="the path to the file on the runner that contains the full "
+                 "event webhook payload",
         )
         parser.add_argument(
             "-w",
@@ -46,19 +46,19 @@ class ExecRyujinxTasks(GithubSubcommand):
             type=Path,
             required=False,
             default=Path(os.getcwd()),
-            help="The working directory on the runner."
+            help="the working directory on the runner"
         )
         parser.add_argument(
             "repo_path",
             type=str,
             required=True,
-            help="The path to a GitHub repository."
+            help="full name of the GitHub repository (format: OWNER/REPO)",
         )
         parser.add_argument(
             "run_id",
             type=int,
             required=True,
-            help="The unique identifier of the workflow run.",
+            help="The unique identifier of the workflow run",
         )
         super().__init__(parser)
 
