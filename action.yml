@@ -30,7 +30,7 @@ runs:
 
     - name: Setup Mako
       if: steps.check_dest.outputs.exists == 'false'
-      uses: ./.github/actions/setup-mako
+      uses: Ryujinx/Ryujinx-Mako/.github/actions/setup-mako@master
 
     - name: Create setup finished flag
       if: steps.check_dest.outputs.exists == 'false'
@@ -38,7 +38,7 @@ runs:
       shell: bash
 
     - name: Run Mako subcommand
-      uses: ./.github/actions/execute-command
+      uses: Ryujinx/Ryujinx-Mako/.github/actions/execute-command@master
       with:
         command: ${{ inputs.command }}
         args: ${{ inputs.args }}
