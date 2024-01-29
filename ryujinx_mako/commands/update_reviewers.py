@@ -1,5 +1,6 @@
 from argparse import ArgumentParser, Namespace
 from pathlib import Path
+from github.PullRequest import PullRequest
 from github.Repository import Repository
 from github.GithubException import GithubException
 
@@ -16,6 +17,21 @@ class UpdateReviewers(GithubSubcommand):
     @staticmethod
     def description() -> str:
         return "Update reviewers for the specified PR"
+
+    @staticmethod
+    def get_existing_reviews(pull_request: PullRequest) -> set[str]:
+        existing = set()
+
+        requested_users, requested_teams = pull_request.get_review_requests()
+        for user in requested_users:
+            existing.add(user.login)
+        for team in requested_teams:
+            existing.add(f"@{team.slug}")
+
+        for review in pull_request.get_reviews():
+            existing.add(review.user.login)
+
+        return existing
 
     def __init__(self, parser: ArgumentParser):
         self._reviewers = set()
@@ -42,9 +58,15 @@ class UpdateReviewers(GithubSubcommand):
         return [x.lower() for x in self._reviewers]
 
     def _remove_reviewer(self, reviewer: str):
-        reviewer_lower = reviewer.lower()
         reviewer_element = None
-        for element in self._reviewers:
+        if reviewer.startswith("@"):
+            reviewer_lower = reviewer.lower()[1:]
+            reviewers_list = self._team_reviewers
+        else:
+            reviewer_lower = reviewer.lower()
+            reviewers_list = self._reviewers
+
+        for element in reviewers_list:
             if element.lower() == reviewer_lower:
                 reviewer_element = element
                 break
@@ -52,7 +74,7 @@ class UpdateReviewers(GithubSubcommand):
         if not reviewer_element:
             raise KeyError(reviewer)
 
-        self._reviewers.remove(reviewer_element)
+        reviewers_list.remove(reviewer_element)
 
     def add_reviewers(self, new_entries: list[str]):
         for reviewer in new_entries:
@@ -84,9 +106,24 @@ class UpdateReviewers(GithubSubcommand):
         if pull_request_author.lower() in self.reviewers_lower:
             self._remove_reviewer(pull_request_author)
 
+        for existing_reviewer in self.get_existing_reviews(pull_request):
+            if (
+                existing_reviewer.startswith("@")
+                and existing_reviewer[1:] in self._team_reviewers
+            ) or (
+                not existing_reviewer.startswith("@")
+                and existing_reviewer.lower() in self.reviewers_lower
+            ):
+                self._remove_reviewer(existing_reviewer)
+
         try:
             reviewers = list(self._reviewers)
             team_reviewers = list(self._team_reviewers)
+
+            if len(reviewers) == 0 and len(team_reviewers) == 0:
+                self.logger.info("No new reviewers to assign.")
+                return 0
+
             self.logger.info(
                 f"Attempting to assign reviewers ({reviewers}) "
                 f"and team_reviewers ({team_reviewers})"
