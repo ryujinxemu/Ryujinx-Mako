@@ -9,8 +9,9 @@ runs:
         echo "mako=$(realpath '${{ github.action_path }}/../../../')" >> $GITHUB_OUTPUT
       shell: bash
 
-    - uses: actions/setup-python@v4
+    - uses: actions/setup-python@v5
       with:
+        python-version: '>=3.8'
         cache: 'poetry'
 
     - name: Ensure pipx is available
