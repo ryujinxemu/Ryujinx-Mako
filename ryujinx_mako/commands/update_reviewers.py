@@ -119,6 +119,11 @@ class UpdateReviewers(GithubSubcommand):
         try:
             reviewers = list(self._reviewers)
             team_reviewers = list(self._team_reviewers)
+
+            if len(reviewers) == 0 and len(team_reviewers) == 0:
+                self.logger.info("No new reviewers to assign.")
+                return 0
+
             self.logger.info(
                 f"Attempting to assign reviewers ({reviewers}) "
                 f"and team_reviewers ({team_reviewers})"
