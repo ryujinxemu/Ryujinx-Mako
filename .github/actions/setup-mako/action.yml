@@ -26,11 +26,6 @@ runs:
       run: pipx install poetry
       shell: bash
 
-    - uses: actions/setup-python@v5
-      with:
-        python-version: '>=3.8'
-        cache: 'poetry'
-
     - run: |
         cd "${{ steps.path.outputs.mako }}"
         poetry install --only main
