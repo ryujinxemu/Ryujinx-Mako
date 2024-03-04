@@ -94,6 +94,10 @@ class UpdateReviewers(GithubSubcommand):
             self.logger.warning("Not assigning reviewers for draft PRs")
             return 0
 
+        if pull_request.closed_at is not None or pull_request.merged_at is not None:
+            self.logger.warning("Not assigning reviewers for closed PRs")
+            return 0
+
         pull_request_author = pull_request.user.login
 
         for label in pull_request.labels:
