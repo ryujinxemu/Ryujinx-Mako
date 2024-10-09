@@ -5,25 +5,25 @@ updates:
     schedule:
       interval: weekly
     reviewers:
-      - TSRBerry
+      - smoresdonut
 
   - package-ecosystem: "github-actions"
     directory: ".github/actions/execute-command/"
     schedule:
       interval: weekly
     reviewers:
-      - TSRBerry
+      - smoresdonut
 
   - package-ecosystem: "github-actions"
     directory: ".github/actions/setup-mako/"
     schedule:
       interval: weekly
     reviewers:
-      - TSRBerry
+      - smoresdonut
 
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
       interval: weekly
     reviewers:
-      - TSRBerry
+      - smoresdonut
